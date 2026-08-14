@@ -34,10 +34,10 @@ public class Lesson13_Collections {
 
         // ===== HashMap: key → value =====
         HashMap<String, Integer> marks = new HashMap<>();
-        marks.put("Shashwat", 88);
-        marks.put("Asha", 92);
+        marks.put("Shashwat", 98);
+        marks.put("Asha", 89);
         marks.put("Ravi", 75);
-        marks.put("Asha", 95); // same key overwrites old value
+        marks.put("Asha", 92); // same key overwrites old value
 
         System.out.println("--- HashMap ---");
         System.out.println("Marks: " + marks);
