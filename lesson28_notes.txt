@@ -1,3 +1,6 @@
 Line 1: Hello Java
 Line 2: try-with-resources closes for you
 Line 3: no writer.close() needed
+Line 4: I appended this
+Line 5: another new line
+Line 6: via Files.writeString
