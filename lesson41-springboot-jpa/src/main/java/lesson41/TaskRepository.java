@@ -7,4 +7,5 @@ import java.util.List;
 // Spring implements this interface for you — no SQL needed for basic CRUD
 public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findByDoneTrue();
+    List<Task> findByDoneFalse();
 }

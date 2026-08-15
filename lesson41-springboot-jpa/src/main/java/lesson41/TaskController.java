@@ -26,8 +26,13 @@ public class TaskController {
         return repo.findByDoneTrue(); // method name → Spring writes the query
     }
 
+    @GetMapping("/todo")
+    public List<Task> getTodo() {
+        return repo.findByDoneFalse();
+    }
+
     @GetMapping("/{id}")
-    public Task getOne(@PathVariable Long id) { 
+    public Task getOne(@PathVariable Long id) {
         return repo.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
     }
