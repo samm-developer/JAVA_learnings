@@ -51,7 +51,9 @@ public class Lesson32_TaskList {
                 case 2 -> listTasks();
                 case 3 -> markDone(sc);
                 case 4 -> listOverdue();
-                case 5 -> save();
+                case 5 -> deleteTask(sc);
+                case 6 -> editDueDate(sc);
+                case 7 -> save();
                 case 0 -> {
                     save();
                     System.out.println("Saved. Bye!");
@@ -69,7 +71,9 @@ public class Lesson32_TaskList {
         System.out.println("2. List tasks (by due date)");
         System.out.println("3. Mark task done");
         System.out.println("4. Show overdue");
-        System.out.println("5. Save");
+        System.out.println("5. Delete task");
+        System.out.println("6. Edit due date");
+        System.out.println("7. Save");
         System.out.println("0. Exit");
     }
 
@@ -116,6 +120,46 @@ public class Lesson32_TaskList {
         Task old = tasks.get(n - 1);
         tasks.set(n - 1, new Task(old.title(), old.due(), true));
         System.out.println("Marked done: " + old.title());
+    }
+
+    static void deleteTask(Scanner sc) {
+        listTasks();
+        if (tasks.isEmpty()) return;
+
+        System.out.print("Task number to delete: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        if (n < 1 || n > tasks.size()) {
+            System.out.println("Invalid number.");
+            return;
+        }
+
+        Task removed = tasks.remove(n - 1);
+        System.out.println("Deleted: " + removed.title());
+    }
+
+    static void editDueDate(Scanner sc) {
+        listTasks();
+        if (tasks.isEmpty()) return;
+
+        System.out.print("Task number to edit: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        if (n < 1 || n > tasks.size()) {
+            System.out.println("Invalid number.");
+            return;
+        }
+
+        System.out.print("New due date — days from today (0 = today): ");
+        int days = sc.nextInt();
+        sc.nextLine();
+
+        Task old = tasks.get(n - 1);
+        LocalDate newDue = LocalDate.now().plusDays(days);
+        tasks.set(n - 1, new Task(old.title(), newDue, old.done()));
+        System.out.println("Updated \"" + old.title() + "\" due date → " + newDue.format(FMT));
     }
 
     static void listOverdue() {
