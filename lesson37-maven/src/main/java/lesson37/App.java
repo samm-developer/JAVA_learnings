@@ -9,7 +9,7 @@ import java.net.http.HttpResponse;
 import java.time.Duration;
 
 /**
- * Lesson 37: Maven project + Gson JSON parsing
+ * Lesson 37 Mini Practice: also fetch /todos/5 and print title with Gson
  *
  * From folder lesson37-maven:
  *   mvn -q compile exec:java
@@ -19,9 +19,23 @@ public class App {
         HttpClient client = HttpClient.newBuilder()
                 .connectTimeout(Duration.ofSeconds(10))
                 .build();
+        Gson gson = new Gson();
 
+        Todo todo1 = fetchTodo(client, gson, 1);
+        System.out.println("--- todo 1 ---");
+        System.out.println(todo1);
+        System.out.println("title: " + todo1.title);
+
+        // Mini practice: fetch todo 5
+        Todo todo5 = fetchTodo(client, gson, 5);
+        System.out.println("--- todo 5 ---");
+        System.out.println("title: " + todo5.title);
+        System.out.println("completed: " + todo5.completed);
+    }
+
+    static Todo fetchTodo(HttpClient client, Gson gson, int id) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/todos/1"))
+                .uri(URI.create("https://jsonplaceholder.typicode.com/todos/" + id))
                 .timeout(Duration.ofSeconds(10))
                 .GET()
                 .build();
@@ -31,20 +45,7 @@ public class App {
                 HttpResponse.BodyHandlers.ofString()
         );
 
-        System.out.println("Status: " + response.statusCode());
-        System.out.println("Raw JSON: " + response.body());
-
-        // Gson turns JSON text → Java object
-        Gson gson = new Gson();
-        Todo todo = gson.fromJson(response.body(), Todo.class);
-
-        System.out.println("--- parsed with Gson ---");
-        System.out.println(todo);
-        System.out.println("title: " + todo.title);
-        System.out.println("completed: " + todo.completed);
-
-        // Java object → JSON text
-        String backToJson = gson.toJson(todo);
-        System.out.println("Back to JSON: " + backToJson);
+        System.out.println("Status for id=" + id + ": " + response.statusCode());
+        return gson.fromJson(response.body(), Todo.class);
     }
 }
