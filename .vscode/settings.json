@@ -1,5 +1,9 @@
 {
   "files.exclude": {
     "**/*.class": true
-  }
+  },
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
+  "java.autobuild.enabled": true,
+  "java.configuration.updateBuildConfiguration": "automatic"
 }
