@@ -10,7 +10,6 @@ public class Lesson30_Optional {
     public static void main(String[] args) {
         Map<String, Integer> marks = new HashMap<>();
         marks.put("Asha", 92);
-        marks.put("Ravi", 75);
         // Neha is missing on purpose
 
         // ===== Old style: null checks =====
