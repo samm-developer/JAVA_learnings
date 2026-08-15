@@ -8,32 +8,39 @@ public class Lesson26_Synchronized {
         runTest(false);
 
         System.out.println();
-        System.out.println("=== WITH synchronized (should be 20000) ===");
+        System.out.println("=== WITH synchronized (correct, but slower) ===");
         runTest(true);
     }
 
     static void runTest(boolean useLock) throws InterruptedException {
         Counter counter = new Counter(useLock);
+        final int TIMES = 1_000_000; // more work so timing is visible
 
         Thread t1 = new Thread(() -> {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < TIMES; i++) {
                 counter.increment();
             }
         });
 
         Thread t2 = new Thread(() -> {
-            for (int i = 0; i < 10000; i++) {
+            for (int i = 0; i < TIMES; i++) {
                 counter.increment();
             }
         });
+
+        long start = System.nanoTime();
 
         t1.start();
         t2.start();
         t1.join();
         t2.join();
 
+        long end = System.nanoTime();
+        double timeMs = (end - start) / 1_000_000.0; // fractional milliseconds
+
         System.out.println("Final count: " + counter.getValue());
-        System.out.println("Expected:    20000");
+        System.out.println("Expected:    " + (TIMES * 2));
+        System.out.println("Time taken:  " + timeMs + " ms");
     }
 }
 
