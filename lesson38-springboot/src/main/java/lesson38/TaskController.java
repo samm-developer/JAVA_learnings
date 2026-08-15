@@ -17,7 +17,7 @@ public class TaskController {
 
     public TaskController() {
         // starter data
-        tasks.add(new Task(nextId.getAndIncrement(), "Learn Spring Boot", false));
+        tasks.add(new Task(nextId.getAndIncrement(), "Learn Spring Boot", true));  // done
         tasks.add(new Task(nextId.getAndIncrement(), "Build a REST API", false));
     }
 
@@ -25,6 +25,15 @@ public class TaskController {
     @GetMapping
     public List<Task> getAll() {
         return tasks;
+    }
+
+    // Fixed path BEFORE /{id} (best practice)
+    // GET http://localhost:8080/api/tasks/done
+    @GetMapping("/done")
+    public List<Task> getDone() {
+        return tasks.stream()
+                .filter(Task::isDone)
+                .toList();
     }
 
     // GET http://localhost:8080/api/tasks/1
