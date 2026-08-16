@@ -1,12 +1,12 @@
-package lesson43;
+package lesson44;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TaskSecurityApplication {
+public class TaskRolesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskSecurityApplication.class, args);
+        SpringApplication.run(TaskRolesApplication.class, args);
     }
 }

@@ -1,9 +1,10 @@
-package lesson43;
+package lesson44;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,17 +14,19 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
- * Lesson focus: protect APIs with HTTP Basic auth.
+ * Lesson focus: roles (USER vs ADMIN).
  *
- * Username: learner
- * Password: secret
+ * learner / secret   → ROLE_USER
+ * admin   / admin123 → ROLE_ADMIN
  *
- * - GET /api/tasks      → needs login
- * - GET /api/tasks/{id} → public (numeric id)
- * - POST/PUT/DELETE     → needs login
+ * Rules:
+ * - GET by id          → public
+ * - GET / POST / PUT   → USER or ADMIN
+ * - DELETE             → ADMIN only
  */
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity
 public class SecurityConfig {
 
     @Bean
@@ -32,9 +35,11 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
-                        // Public: get one task by numeric id
                         .requestMatchers(HttpMethod.GET, "/api/tasks/{id:\\d+}").permitAll()
-                        // Protected: get all, create, update, delete, /done, /todo
+                        .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/tasks/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/tasks/**").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
@@ -46,11 +51,18 @@ public class SecurityConfig {
 
     @Bean
     UserDetailsService users() {
-        UserDetails user = User.builder()
+        UserDetails learner = User.builder()
                 .username("learner")
                 .password("{noop}secret")
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password("{noop}admin123")
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(learner, admin);
     }
 }

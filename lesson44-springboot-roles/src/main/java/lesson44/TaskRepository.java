@@ -1,4 +1,4 @@
-package lesson43;
+package lesson44;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
