@@ -2,6 +2,7 @@ package lesson43;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +29,10 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
+                        // Public: GET one task by numeric id  (/api/tasks/1)
+                        // Put specific rules BEFORE the broad /api/** rule
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/{id:\\d+}").permitAll()
+                        // Protected: GET all tasks, POST/PUT/DELETE, /done, /todo, ...
                         .requestMatchers("/api/**").authenticated()
                         .anyRequest().permitAll()
                 )
