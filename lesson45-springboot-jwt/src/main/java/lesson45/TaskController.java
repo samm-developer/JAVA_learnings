@@ -1,4 +1,4 @@
-package lesson45;
+package lesson44;
 
 import jakarta.validation.Valid;
 import jakarta.validation.groups.Default;
@@ -60,7 +60,7 @@ public class TaskController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PreAuthorize("hasRole('ADMIN')") // method-level check (also enforced in SecurityConfig)
+    @PreAuthorize("hasRole('ADMIN')")
     public void delete(@PathVariable Long id) {
         if (!repo.existsById(id)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");

@@ -1,12 +1,12 @@
-package lesson45;
+package lesson44;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TaskJwtApplication {
+public class TaskRolesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskJwtApplication.class, args);
+        SpringApplication.run(TaskRolesApplication.class, args);
     }
 }
