@@ -1,0 +1,14 @@
+lesson45/JwtAuthFilter.class
+lesson45/OnUpdate.class
+lesson45/TaskRepository.class
+lesson45/SecurityConfig.class
+lesson45/Task.class
+lesson45/TaskJwtApplication.class
+lesson45/TaskRequest.class
+lesson45/LoginRequest.class
+lesson45/DataLoader.class
+lesson45/JwtService.class
+lesson45/TokenResponse.class
+lesson45/ApiExceptionHandler.class
+lesson45/TaskController.class
+lesson45/AuthController.class
