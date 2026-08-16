@@ -1,0 +1,7 @@
+lesson42/Task.class
+lesson42/TaskRequest.class
+lesson42/TaskRepository.class
+lesson42/ApiExceptionHandler.class
+lesson42/TaskController.class
+lesson42/DataLoader.class
+lesson42/TaskValidationApplication.class
