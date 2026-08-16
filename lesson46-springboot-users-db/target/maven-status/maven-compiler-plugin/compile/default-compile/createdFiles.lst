@@ -1,0 +1,17 @@
+lesson46/TaskController.class
+lesson46/TaskRepository.class
+lesson46/AuthController.class
+lesson46/UserRepository.class
+lesson46/TaskRequest.class
+lesson46/ApiExceptionHandler.class
+lesson46/DbUserDetailsService.class
+lesson46/LoginRequest.class
+lesson46/TaskUsersDbApplication.class
+lesson46/SecurityConfig.class
+lesson46/JwtAuthFilter.class
+lesson46/AppUser.class
+lesson46/Task.class
+lesson46/OnUpdate.class
+lesson46/DataLoader.class
+lesson46/TokenResponse.class
+lesson46/JwtService.class
