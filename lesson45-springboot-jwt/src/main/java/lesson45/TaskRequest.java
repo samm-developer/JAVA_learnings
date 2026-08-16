@@ -1,4 +1,4 @@
-package lesson44;
+package lesson45;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

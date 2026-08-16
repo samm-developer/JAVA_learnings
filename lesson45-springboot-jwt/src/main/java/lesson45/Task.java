@@ -1,4 +1,4 @@
-package lesson44;
+package lesson45;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
