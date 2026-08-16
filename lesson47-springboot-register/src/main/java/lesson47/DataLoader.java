@@ -20,8 +20,8 @@ public class DataLoader {
             }
 
             if (taskRepo.count() == 0) {
-                taskRepo.save(new Task("Learn users in DB", false));
-                taskRepo.save(new Task("Passwords are hashed", true));
+                taskRepo.save(new Task("Learn register", false));
+                taskRepo.save(new Task("New users get USER role", true));
             }
         };
     }

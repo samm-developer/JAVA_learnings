@@ -15,11 +15,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
- * Lesson focus: users live in the DB (+ BCrypt), JWT stays the same as lesson 45.
+ * Lesson focus: public register + login (JWT).
  *
- * Seeded accounts (see DataLoader):
- *   learner / secret   → USER
- *   admin   / admin123 → ADMIN
+ * POST /api/auth/register  → create USER, return token
+ * POST /api/auth/login     → return token
+ *
+ * Seeded: learner/secret (USER), admin/admin123 (ADMIN)
  */
 @Configuration
 @EnableWebSecurity
@@ -40,7 +41,7 @@ public class SecurityConfig {
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/api/auth/login").permitAll()
+                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/tasks/{id:\\d+}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/tasks/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/tasks/**").hasAnyRole("USER", "ADMIN")
