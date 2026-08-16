@@ -1,0 +1,16 @@
+services:
+  tasks-api:
+    build: .
+    ports:
+      - "8097:8097"
+    environment:
+      # H2 file inside the container; kept on a Docker volume
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/data/lesson52-tasks;AUTO_SERVER=TRUE
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      APP_JWT_SECRET: Lesson52LearningSecretKeyMustBeAtLeast32BytesLong!
+    volumes:
+      - lesson52-data:/data
+
+volumes:
+  lesson52-data:
