@@ -1,6 +1,7 @@
 package lesson42;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 // DTO = data sent by the client (not the DB entity itself)
@@ -10,7 +11,9 @@ public class TaskRequest {
     @Size(min = 3, max = 100, message = "title must be 3-100 characters")
     private String title;
 
-    private boolean done;
+    // Required only when validating with OnUpdate group (PUT)
+    @NotNull(groups = OnUpdate.class, message = "done is required")
+    private Boolean done;
 
     public String getTitle() {
         return title;
@@ -20,11 +23,11 @@ public class TaskRequest {
         this.title = title;
     }
 
-    public boolean isDone() {
+    public Boolean getDone() {
         return done;
     }
 
-    public void setDone(boolean done) {
+    public void setDone(Boolean done) {
         this.done = done;
     }
 }

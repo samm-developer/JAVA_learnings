@@ -1,7 +1,9 @@
 package lesson42;
 
 import jakarta.validation.Valid;
+import jakarta.validation.groups.Default;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -41,14 +43,18 @@ public class TaskController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Task create(@Valid @RequestBody TaskRequest request) {
-        return repo.save(new Task(request.getTitle(), request.isDone()));
+        // done optional on create → missing/null means false
+        boolean done = Boolean.TRUE.equals(request.getDone());
+        return repo.save(new Task(request.getTitle(), done));
     }
 
     @PutMapping("/{id}")
-    public Task update(@PathVariable Long id, @Valid @RequestBody TaskRequest request) {
+    public Task update(
+            @PathVariable Long id,
+            @Validated({Default.class, OnUpdate.class}) @RequestBody TaskRequest request) {
         Task existing = getOne(id);
         existing.setTitle(request.getTitle());
-        existing.setDone(request.isDone());
+        existing.setDone(request.getDone());
         return repo.save(existing);
     }
 
