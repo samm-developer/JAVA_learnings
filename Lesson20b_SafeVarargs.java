@@ -38,7 +38,7 @@ public class Lesson20b_SafeVarargs {
      * Without @SafeVarargs, javac shows:
      *   warning: [unchecked] Possible heap pollution from parameterized vararg type
      */
-    @SafeVarargs
+    // @SafeVarargs
     static <T> List<T> asListSafe(T... items) {
         return new ArrayList<>(Arrays.asList(items));
     }
@@ -46,7 +46,7 @@ public class Lesson20b_SafeVarargs {
     /**
      * Also SAFE: only iterate / print. Don't expose the array.
      */
-    @SafeVarargs
+    // @SafeVarargs
     static <T> void printAll(T... items) {
         for (T item : items) {
             System.out.println("  item = " + item);
