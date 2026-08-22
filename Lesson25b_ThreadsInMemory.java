@@ -52,20 +52,36 @@ public class Lesson25b_ThreadsInMemory {
     }
 
     static void eachThreadHasOwnStack() throws InterruptedException {
-        System.out.println("=== 1) Each thread has its own stack (local vars) ===");
+        System.out.println("=== 1) Each thread has its own stack (mainLocal vs workerLocal) ===");
+        System.out.println("""
+                  MAIN thread STACK          WORKER thread STACK
+                  -----------------          -------------------
+                  mainLocal = 42             workerLocal = 100
+                  (main cannot see 100)      (worker cannot see 42)
+                """);
+
+        int mainLocal = 42; // lives on MAIN stack only
 
         Thread t = new Thread(() -> {
-            int local = 100; // on Worker stack only — main cannot see this
-            System.out.println("  Worker stack → local=" + local
+            int workerLocal = 100; // lives on WORKER stack only — different memory!
+
+            // Even if we used the SAME name "mainLocal" here, it would still be
+            // a separate variable on the worker's stack (shadowing — not shared).
+            // int mainLocal = 999;  // this would NOT change main's mainLocal
+
+            workerLocal = 200; // only changes worker's stack slot
+            System.out.println(mainLocal+ "  Worker stack → workerLocal=" + workerLocal
                     + "  thread=" + Thread.currentThread().getName());
         }, "Worker");
 
-        int mainLocal = 42; // on main stack only
         System.out.println("  Main stack   → mainLocal=" + mainLocal
                 + "  thread=" + Thread.currentThread().getName());
 
         t.start();
         t.join();
+
+        // mainLocal unchanged — worker never touched main's stack
+        System.out.println("  Main after join → mainLocal still " + mainLocal);
         System.out.println();
     }
 
