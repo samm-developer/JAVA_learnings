@@ -19,11 +19,11 @@ import java.util.concurrent.TimeUnit;
 public class Lesson25d_ThreadPool {
 
     public static void main(String[] args) throws Exception {
-        // whyPool();
-        // fixedPoolExecute();
-        // fixedPoolSubmitAndFuture();
-        // manyTasksFewWorkers();
-        // shutdownProperly();
+        whyPool();
+        fixedPoolExecute();
+        fixedPoolSubmitAndFuture();
+        manyTasksFewWorkers();
+        shutdownProperly();
         poolTypes();
     }
 
