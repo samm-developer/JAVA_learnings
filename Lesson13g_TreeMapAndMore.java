@@ -117,8 +117,15 @@ public class Lesson13g_TreeMapAndMore {
                   LinkedHashSet        unique, insert order
                   TreeSet              unique, sorted
 
-                Legacy (avoid for new code): Vector, Hashtable (global sync)
+                Series complete: 13 → 13b → 13c…13n (see below)
+
+                13h Iterable/Iterator/ListIterator
+                13i ArrayList deep dive
+                13j Set hierarchy (HashSet, TreeSet, NavigableSet, …)
+                13k Legacy (Hashtable, Vector, Stack)
+                13l Deque & ArrayDeque
+                13m Comparable vs Comparator
+                13n SortedMap & NavigableMap / TreeMap
                 """);
-        System.out.println("Series complete: 13 → 13b → 13c → 13d → 13e → 13f → 13g");
     }
 }
