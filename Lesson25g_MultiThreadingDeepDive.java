@@ -6,6 +6,7 @@
 //   25  basics → 25b memory → 25c ThreadLocal → 25d/e/f pools
 //   26  synchronized → 27 atomic → 27b CompletableFuture
 //   25g this file = big picture + lifecycle + volatile + wait/notify + deadlock
+//   25h Daemon threads | 25i Thread priority | 25j Inter-thread communication (deep)
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
