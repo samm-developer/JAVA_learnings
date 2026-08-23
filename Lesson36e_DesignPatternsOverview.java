@@ -3,9 +3,12 @@
 // Run:     java Lesson36e_DesignPatternsOverview
 //
 // Study order:
-//   36b  Strategy, Factory, Builder  (deep mini demos)
+//   36e  this file — full map (start here)
+//   36f  Singleton       36g  Strategy       36h  Factory       36i  Builder
+//   36j  Adapter         36k  Decorator      36l  Observer      36m  Template Method
+//   36n  Facade
 //   36d  SOLID principles
-//   36e  this file — full map + Singleton, Adapter, Decorator, Observer, Template
+//   36b  legacy combined demo (Strategy + Factory + Builder in one file)
 //
 // ========== CHEAT SHEET ==========
 //
@@ -297,8 +300,12 @@ public class Lesson36e_DesignPatternsOverview {
                 Factory (36b)  Decorator       Observer
                 Builder (36b)  Facade          Template Method
 
-                Run 36b for Strategy / Factory / Builder code:
-                  javac Lesson36b_DesignPatterns.java && java Lesson36b_DesignPatterns
+                One file per pattern (problem → solution in each):
+                  36f Singleton   36g Strategy    36h Factory     36i Builder
+                  36j Adapter     36k Decorator  36l Observer    36m Template Method
+                  36n Facade
+
+                Example: javac Lesson36f_Singleton.java && java Lesson36f_Singleton
                 """);
     }
 }
