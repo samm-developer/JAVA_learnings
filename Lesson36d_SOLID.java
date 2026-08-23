@@ -9,6 +9,18 @@
 // L — Liskov Substitution
 // I — Interface Segregation
 // D — Dependency Inversion
+//
+// ========== NOTES: SOLID is NOT "five ways to say SRP" ==========
+//
+// Principle | Question it answers                          | Not the same as SRP because…
+// ----------|-----------------------------------------------|-----------------------------
+// S         | Does this class have too many jobs?            | One class, one reason to change
+// O         | Do I edit old code every time I add a feature?| About extension vs modification, not class count
+// L         | Can I swap subclass without breaking callers? | About behavior contract, not splitting work
+// I         | Am I forcing classes to implement unused API? | About interface shape, not one class one job
+// D         | Am I glued to MySQL / concrete classes?       | About depending on abstractions, not splitting logic
+//
+// SRP is the habit; O/L/I/D are extra rules for extension, inheritance, interfaces, and wiring.
 
 public class Lesson36d_SOLID {
 
@@ -311,6 +323,13 @@ public class Lesson36d_SOLID {
                 L  Liskov Substitution     subclass must honor parent contract
                 I  Interface Segregation   small interfaces, not fat ones
                 D  Dependency Inversion    depend on interfaces, inject concretes
+
+                --- NOT the same as SRP (each fixes a different mistake) ---
+                S  too many jobs in one class?
+                O  editing old code for every new feature?
+                L  subclass breaks parent contract?
+                I  fat interface forces unused methods?
+                D  glued to concrete MySQL / impl classes?
 
                 You already use D in Spring: Controller → Service interface → impl
                 """);
