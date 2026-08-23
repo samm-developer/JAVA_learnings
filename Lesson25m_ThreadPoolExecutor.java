@@ -31,12 +31,28 @@ public class Lesson25m_ThreadPoolExecutor {
         System.out.println("""
                 corePoolSize (min):  threads created first; kept ready for work
                 maximumPoolSize:     hard limit — never more than this many workers
+                """);
+        printFlowDiagram();
+    }
 
-                New task:
-                  1) workers < core     → create thread
-                  2) workers == core    → put in QUEUE
-                  3) queue FULL + < max → create EXTRA thread (up to max)
-                  4) queue FULL + == max → REJECT
+    static void printFlowDiagram() {
+        System.out.println("""
+                  New task arrives
+                         │
+                         ▼
+                poolSize < core? ──yes──► CREATE core thread
+                         │
+                        no
+                         ▼
+                queue has space? ──yes──► ENQUEUE (wait for free worker)
+                         │
+                        no
+                         ▼
+                poolSize < max? ──yes──► CREATE extra thread (above core)
+                         │
+                        no
+                         ▼
+                      REJECT ❌
                 """);
     }
 
@@ -53,22 +69,12 @@ public class Lesson25m_ThreadPoolExecutor {
 
     static void eightTasksDemo() throws InterruptedException {
         LessonConsole.heading("=== DEMO: 8 tasks — core=2, max=4, queue=2 ===");
-        // System.out.println("""
-        //           Capacity before reject:
-        //             2 core workers + 2 queued + 2 extra (grow to max=4) = 6 tasks OK
-        //             task 7 & 8 → REJECT (max workers busy + queue full)
-
-        //           Submit loop:
-        //             T1,T2 → create core threads (poolSize 1→2)
-        //             T3,T4 → queue fills (queued 1→2)
-        //             T5,T6 → create extra threads (poolSize 3→4)
-        //             T7,T8 → ❌ RejectedExecutionException
-        //         """);
+        printEightTaskDiagram();
 
         ThreadPoolExecutor pool = new ThreadPoolExecutor(
                 2,                          // min (core)
                 4,                          // max
-                30, TimeUnit.SECONDS,
+                30, TimeUnit.SECONDS,          // extra threads (above core) die after 30s idle
                 new ArrayBlockingQueue<>(2)   // queue size 2
         );
 
@@ -99,6 +105,29 @@ public class Lesson25m_ThreadPoolExecutor {
         pool.awaitTermination(15, TimeUnit.SECONDS);
         System.out.println("  accepted=" + accepted.get() + " rejected=" + rejected.get() + "  ✅");
         System.out.println();
+    }
+
+    static void printEightTaskDiagram() {
+        System.out.println("""
+                  ThreadPoolExecutor( core=2, max=4, queue=2 )
+
+                  WORKERS (up to 4)                 QUEUE (size 2)
+                  ┌──────────────────┐              ┌──────────────┐
+                  │ core-1   runs T1 │              │ slot → T3    │
+                  │ core-2   runs T2 │  ◄── T3,T4   │ slot → T4    │
+                  │ extra-3  runs T5 │   wait here  └──────────────┘
+                  │ extra-4  runs T6 │   BEFORE extra threads spawn
+                  └──────────────────┘
+
+                  Capacity = 2 core + 2 queued + 2 extra = 6 tasks OK
+                  T7, T8 → REJECT (4 workers busy + queue full)
+
+                  Submit loop:
+                    task   1   2   3   4   5   6   7   8
+                    result OK  OK  OK  OK  OK  OK  ❌  ❌
+                  poolSize  1 → 2 → 2 → 2 → 3 → 4 → 4 → 4
+                  queued    0   0   1   2   2   2   2   2
+                """);
     }
 
     static void summary() {
