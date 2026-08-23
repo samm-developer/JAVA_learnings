@@ -1,5 +1,5 @@
 // Lesson 36e: Design Patterns — overview + more patterns (beyond 36b)
-// Compile: javac Lesson36e_DesignPatternsOverview.java
+// Compile: javac LessonConsole.java Lesson36e_DesignPatternsOverview.java
 // Run:     java Lesson36e_DesignPatternsOverview
 //
 // Study order:
@@ -46,7 +46,7 @@ public class Lesson36e_DesignPatternsOverview {
     }
 
     static void whatIsPattern() {
-        System.out.println("=== 0) What is a design pattern? ===");
+        LessonConsole.heading("=== 0) What is a design pattern? ===");
         System.out.println("""
                 Real problem → many teams hit it → common solution gets a NAME.
 
@@ -62,7 +62,7 @@ public class Lesson36e_DesignPatternsOverview {
     // SINGLETON — one instance in the JVM
     // -------------------------------------------------------------------------
     static void singletonDemo() {
-        System.out.println("=== 1) Singleton (Creational) ===");
+        LessonConsole.heading("=== 1) Singleton (Creational) ===");
         System.out.println("  Problem: many AppConfig objects → inconsistent settings");
         System.out.println("  Solution: private ctor + getInstance()");
 
@@ -97,7 +97,7 @@ public class Lesson36e_DesignPatternsOverview {
     // ADAPTER — make incompatible interface work
     // -------------------------------------------------------------------------
     static void adapterDemo() {
-        System.out.println("=== 2) Adapter (Structural) ===");
+        LessonConsole.heading("=== 2) Adapter (Structural) ===");
         System.out.println("  Problem: app expects PaymentGateway.charge(), legacy has payLegacy()");
         System.out.println("  Solution: adapter wraps legacy behind expected interface");
 
@@ -132,7 +132,7 @@ public class Lesson36e_DesignPatternsOverview {
     // DECORATOR — wrap object to add behavior
     // -------------------------------------------------------------------------
     static void decoratorDemo() {
-        System.out.println("=== 3) Decorator (Structural) ===");
+        LessonConsole.heading("=== 3) Decorator (Structural) ===");
         System.out.println("  Problem: add logging to Coffee without editing Coffee class");
         System.out.println("  Solution: wrapper implements same interface, delegates + extra");
 
@@ -190,7 +190,7 @@ public class Lesson36e_DesignPatternsOverview {
     // OBSERVER — publish / subscribe
     // -------------------------------------------------------------------------
     static void observerDemo() {
-        System.out.println("=== 4) Observer (Behavioral) ===");
+        LessonConsole.heading("=== 4) Observer (Behavioral) ===");
         System.out.println("  Problem: order status changes → email + SMS must know");
         System.out.println("  Solution: subject notifies registered observers");
 
@@ -233,7 +233,7 @@ public class Lesson36e_DesignPatternsOverview {
     // TEMPLATE METHOD — algorithm skeleton in base class
     // -------------------------------------------------------------------------
     static void templateMethodDemo() {
-        System.out.println("=== 5) Template Method (Behavioral) ===");
+        LessonConsole.heading("=== 5) Template Method (Behavioral) ===");
         System.out.println("  Problem: PDF and HTML reports share steps but differ in export");
         System.out.println("  Solution: base class defines steps; subclasses override hooks");
 
@@ -280,7 +280,7 @@ public class Lesson36e_DesignPatternsOverview {
     }
 
     static void springMap() {
-        System.out.println("=== 6) Patterns in Spring (you already use them) ===");
+        LessonConsole.heading("=== 6) Patterns in Spring (you already use them) ===");
         System.out.println("""
                 Factory     → BeanFactory creates beans by name/type
                 Strategy    → different AuthProvider / PasswordEncoder impls
@@ -293,7 +293,7 @@ public class Lesson36e_DesignPatternsOverview {
     }
 
     static void summary() {
-        System.out.println("=== Full map ===");
+        LessonConsole.heading("=== Full map ===");
         System.out.println("""
                 CREATIONAL     STRUCTURAL      BEHAVIORAL
                 Singleton      Adapter         Strategy     (36b)

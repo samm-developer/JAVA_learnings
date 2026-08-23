@@ -1,5 +1,5 @@
 // Lesson 36l: Observer pattern (Behavioral)
-// Compile: javac Lesson36l_Observer.java
+// Compile: javac LessonConsole.java Lesson36l_Observer.java
 // Run:     java Lesson36l_Observer
 //
 // After: Lesson 36k (Decorator)
@@ -21,7 +21,7 @@ public class Lesson36l_Observer {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: Order knows every notification channel ===");
+        LessonConsole.heading("=== PROBLEM: Order knows every notification channel ===");
         BadOrder order = new BadOrder("ORD-99");
         order.setStatus("SHIPPED");
         System.out.println("  Add WhatsApp? → edit BadOrder.setStatus() again ❌");
@@ -29,7 +29,7 @@ public class Lesson36l_Observer {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Observer — register listeners, subject notifies ===");
+        LessonConsole.heading("=== SOLUTION: Observer — register listeners, subject notifies ===");
         GoodOrder order = new GoodOrder("ORD-99");
         order.addObserver(msg -> System.out.println("  Email: " + msg));
         order.addObserver(msg -> System.out.println("  SMS:   " + msg));
@@ -40,7 +40,7 @@ public class Lesson36l_Observer {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Observer ===");
+        LessonConsole.heading("=== Summary: Observer ===");
         System.out.println("""
                 When:     one state change must reach many unrelated listeners
                 How:      subject maintains List<Observer>; setState → loop notify

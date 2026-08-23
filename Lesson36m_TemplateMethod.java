@@ -1,5 +1,5 @@
 // Lesson 36m: Template Method pattern (Behavioral)
-// Compile: javac Lesson36m_TemplateMethod.java
+// Compile: javac LessonConsole.java Lesson36m_TemplateMethod.java
 // Run:     java Lesson36m_TemplateMethod
 //
 // After: Lesson 36l (Observer)
@@ -18,7 +18,7 @@ public class Lesson36m_TemplateMethod {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: duplicated steps in each report class ===");
+        LessonConsole.heading("=== PROBLEM: duplicated steps in each report class ===");
         new BadPdfReport().generate();
         new BadHtmlReport().generate();
         System.out.println("  fetch + export copied in both classes ❌");
@@ -26,7 +26,7 @@ public class Lesson36m_TemplateMethod {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Template Method — skeleton in base, hooks in subclasses ===");
+        LessonConsole.heading("=== SOLUTION: Template Method — skeleton in base, hooks in subclasses ===");
         Report pdf = new PdfReport();
         Report html = new HtmlReport();
         pdf.generate();
@@ -36,7 +36,7 @@ public class Lesson36m_TemplateMethod {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Template Method ===");
+        LessonConsole.heading("=== Summary: Template Method ===");
         System.out.println("""
                 When:     algorithm steps are same, only some steps differ
                 How:      final generate() in base calls abstract format()/export()

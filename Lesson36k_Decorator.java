@@ -1,5 +1,5 @@
 // Lesson 36k: Decorator pattern (Structural)
-// Compile: javac Lesson36k_Decorator.java
+// Compile: javac LessonConsole.java Lesson36k_Decorator.java
 // Run:     java Lesson36k_Decorator
 //
 // After: Lesson 36j (Adapter)
@@ -18,7 +18,7 @@ public class Lesson36k_Decorator {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: one subclass per combination ===");
+        LessonConsole.heading("=== PROBLEM: one subclass per combination ===");
         Coffee plain = new PlainCoffee();
         Coffee withMilk = new CoffeeWithMilk();
         Coffee withMilkAndLog = new CoffeeWithMilkAndLog();
@@ -30,7 +30,7 @@ public class Lesson36k_Decorator {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Decorator — stack wrappers at runtime ===");
+        LessonConsole.heading("=== SOLUTION: Decorator — stack wrappers at runtime ===");
         Coffee coffee = new SimpleCoffee();
         coffee = new MilkDecorator(coffee);
         coffee = new LoggingDecorator(coffee);
@@ -39,7 +39,7 @@ public class Lesson36k_Decorator {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Decorator ===");
+        LessonConsole.heading("=== Summary: Decorator ===");
         System.out.println("""
                 When:     add features without editing original class or exploding subclasses
                 How:      decorator implements same interface, holds inner object, delegates + extras

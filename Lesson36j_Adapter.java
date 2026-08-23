@@ -1,5 +1,5 @@
 // Lesson 36j: Adapter pattern (Structural)
-// Compile: javac Lesson36j_Adapter.java
+// Compile: javac LessonConsole.java Lesson36j_Adapter.java
 // Run:     java Lesson36j_Adapter
 //
 // After: Lesson 36i (Builder)
@@ -18,7 +18,7 @@ public class Lesson36j_Adapter {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: client tied to legacy API ===");
+        LessonConsole.heading("=== PROBLEM: client tied to legacy API ===");
         LegacyPaySystem legacy = new LegacyPaySystem();
         // Checkout expects charge() — legacy only has payLegacy()
         System.out.println("  legacy.payLegacy(500) = " + legacy.payLegacy(500));
@@ -27,7 +27,7 @@ public class Lesson36j_Adapter {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Adapter wraps legacy behind PaymentGateway ===");
+        LessonConsole.heading("=== SOLUTION: Adapter wraps legacy behind PaymentGateway ===");
         PaymentGateway gw = new LegacyPaymentAdapter(new LegacyPaySystem());
         System.out.println("  checkout.charge(500) = " + checkout(gw, 500) + "  ✅");
         System.out.println();
@@ -38,7 +38,7 @@ public class Lesson36j_Adapter {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Adapter ===");
+        LessonConsole.heading("=== Summary: Adapter ===");
         System.out.println("""
                 When:     existing class API does not match what callers need
                 How:      adapter implements target interface, holds legacy object, translates calls

@@ -1,5 +1,5 @@
 // Lesson 36h: Factory pattern (Creational)
-// Compile: javac Lesson36h_Factory.java
+// Compile: javac LessonConsole.java Lesson36h_Factory.java
 // Run:     java Lesson36h_Factory
 //
 // After: Lesson 36g (Strategy)
@@ -18,7 +18,7 @@ public class Lesson36h_Factory {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: client picks concrete class everywhere ===");
+        LessonConsole.heading("=== PROBLEM: client picks concrete class everywhere ===");
         BadAlertService alerts = new BadAlertService();
         System.out.println("  " + alerts.sendWelcome("email"));
         System.out.println("  " + alerts.sendWelcome("sms"));
@@ -27,7 +27,7 @@ public class Lesson36h_Factory {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Factory — central creation by type ===");
+        LessonConsole.heading("=== SOLUTION: Factory — central creation by type ===");
         GoodAlertService alerts = new GoodAlertService();
         System.out.println("  " + alerts.sendWelcome("email"));
         System.out.println("  " + alerts.sendWelcome("sms"));
@@ -36,7 +36,7 @@ public class Lesson36h_Factory {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Factory ===");
+        LessonConsole.heading("=== Summary: Factory ===");
         System.out.println("""
                 When:     object type chosen at runtime from a fixed set
                 How:      factory method/class maps key → new XxxImpl()

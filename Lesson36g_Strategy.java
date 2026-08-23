@@ -1,5 +1,5 @@
 // Lesson 36g: Strategy pattern (Behavioral)
-// Compile: javac Lesson36g_Strategy.java
+// Compile: javac LessonConsole.java Lesson36g_Strategy.java
 // Run:     java Lesson36g_Strategy
 //
 // After: Lesson 36f (Singleton)
@@ -18,7 +18,7 @@ public class Lesson36g_Strategy {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: if/else payment logic inside Checkout ===");
+        LessonConsole.heading("=== PROBLEM: if/else payment logic inside Checkout ===");
         BadCheckout cart = new BadCheckout();
         System.out.println("  " + cart.checkout("card", 500));
         System.out.println("  " + cart.checkout("upi", 500));
@@ -27,7 +27,7 @@ public class Lesson36g_Strategy {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Strategy — swap algorithm at runtime ===");
+        LessonConsole.heading("=== SOLUTION: Strategy — swap algorithm at runtime ===");
         GoodCheckout cart = new GoodCheckout(new CardPay());
         System.out.println("  " + cart.checkout(500));
         cart.setStrategy(new UpiPay());
@@ -38,7 +38,7 @@ public class Lesson36g_Strategy {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Strategy ===");
+        LessonConsole.heading("=== Summary: Strategy ===");
         System.out.println("""
                 When:     several algorithms for the same job (pay, sort, compress)
                 How:      interface + multiple impls; context holds current strategy

@@ -1,5 +1,5 @@
 // Lesson 36f: Singleton pattern (Creational)
-// Compile: javac Lesson36f_Singleton.java
+// Compile: javac LessonConsole.java Lesson36f_Singleton.java
 // Run:     java Lesson36f_Singleton
 //
 // Study order:
@@ -28,7 +28,7 @@ public class Lesson36f_Singleton {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: anyone can new AppConfig() ===");
+        LessonConsole.heading("=== PROBLEM: anyone can new AppConfig() ===");
         BadAppConfig a = new BadAppConfig();
         BadAppConfig b = new BadAppConfig();
         a.setTheme("dark");
@@ -39,7 +39,7 @@ public class Lesson36f_Singleton {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Singleton (private ctor + getInstance) ===");
+        LessonConsole.heading("=== SOLUTION: Singleton (private ctor + getInstance) ===");
         AppConfig x = AppConfig.getInstance();
         AppConfig y = AppConfig.getInstance();
         x.setTheme("dark");
@@ -50,7 +50,7 @@ public class Lesson36f_Singleton {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Singleton ===");
+        LessonConsole.heading("=== Summary: Singleton ===");
         System.out.println("""
                 When:     exactly one instance must exist (app config, logger holder)
                 How:      private constructor blocks `new`; getInstance() returns the one object

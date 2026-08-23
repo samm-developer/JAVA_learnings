@@ -1,5 +1,5 @@
 // Lesson 36i: Builder pattern (Creational)
-// Compile: javac Lesson36i_Builder.java
+// Compile: javac LessonConsole.java Lesson36i_Builder.java
 // Run:     java Lesson36i_Builder
 //
 // After: Lesson 36h (Factory)
@@ -21,7 +21,7 @@ public class Lesson36i_Builder {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: telescoping constructor ===");
+        LessonConsole.heading("=== PROBLEM: telescoping constructor ===");
         // Which boolean? Which tag order? Hard to extend.
         BadTask t = new BadTask("Learn patterns", false, List.of("java", "design"));
         System.out.println("  " + t);
@@ -30,7 +30,7 @@ public class Lesson36i_Builder {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Builder — step-by-step, readable ===");
+        LessonConsole.heading("=== SOLUTION: Builder — step-by-step, readable ===");
         GoodTask t = new GoodTask.Builder()
                 .title("Learn patterns")
                 .done(false)
@@ -42,7 +42,7 @@ public class Lesson36i_Builder {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Builder ===");
+        LessonConsole.heading("=== Summary: Builder ===");
         System.out.println("""
                 When:     object has many optional fields or validation rules
                 How:      private ctor + static Builder with chained setters + build()

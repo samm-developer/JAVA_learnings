@@ -1,5 +1,5 @@
 // Lesson 13b: Collections in memory (how they really sit on the heap)
-// Compile: javac Lesson13b_CollectionsInMemory.java
+// Compile: javac LessonConsole.java Lesson13b_CollectionsInMemory.java
 // Run:     java Lesson13b_CollectionsInMemory
 //
 // Place: after Lesson 13 (Collections) + useful with Lesson 36c (JVM heap/stack).
@@ -24,7 +24,7 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void stackVsHeap() {
-        System.out.println("=== 0) Stack vs Heap ===");
+        LessonConsole.heading("=== 0) Stack vs Heap ===");
         System.out.println("""
                 ArrayList<String> list = new ArrayList<>();
                 list.add("Asha");
@@ -41,7 +41,7 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void arrayListMemory() {
-        System.out.println("=== 1) ArrayList — contiguous Object[] on the heap ===");
+        LessonConsole.heading("=== 1) ArrayList — contiguous Object[] on the heap ===");
         System.out.println("""
                 Internally (simplified):
                   ArrayList
@@ -75,7 +75,7 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void linkedListMemory() {
-        System.out.println("=== 2) LinkedList — nodes linked by pointers ===");
+        LessonConsole.heading("=== 2) LinkedList — nodes linked by pointers ===");
         System.out.println("""
                 Internally (simplified):
                   LinkedList
@@ -99,7 +99,7 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void hashMapMemory() {
-        System.out.println("=== 3) HashMap — array of buckets + chains ===");
+        LessonConsole.heading("=== 3) HashMap — array of buckets + chains ===");
         System.out.println("""
                 Internally (simplified):
                   HashMap
@@ -126,7 +126,7 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void hashSetMemory() {
-        System.out.println("=== 4) HashSet — basically a HashMap under the hood ===");
+        LessonConsole.heading("=== 4) HashSet — basically a HashMap under the hood ===");
         System.out.println("""
                 HashSet stores values as HashMap KEYS (dummy value object).
                 So memory shape ≈ HashMap, uniqueness via hashCode/equals.
@@ -141,12 +141,16 @@ public class Lesson13b_CollectionsInMemory {
     }
 
     static void chooseGuide() {
-        System.out.println("=== 5) What to pick (memory + speed) ===");
+        LessonConsole.heading("=== 5) What to pick (memory + speed) ===");
         System.out.println("""
                 Need index access / mostly append?     → ArrayList  (tight array of refs)
                 Lots of insert/remove at ends?        → LinkedList (rarely needed in practice)
-                Key → value lookup?                   → HashMap
-                Unique values only?                   → HashSet
+                Key → value lookup?                   → HashMap (see 13c deep dive)
+                Key → value + order / LRU?            → LinkedHashMap (13d)
+                Key → value + threads?                → ConcurrentHashMap (13e)
+                Key → value + sorted keys?            → TreeMap (13g)
+                Unique values only?                   → HashSet / LinkedHashSet (13g)
+                Next smallest priority item?          → PriorityQueue (13f)
 
                 Memory tip:
                   ArrayList stores references in ONE array (cache-friendly).

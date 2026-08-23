@@ -1,5 +1,5 @@
 // Lesson 36n: Facade pattern (Structural)
-// Compile: javac Lesson36n_Facade.java
+// Compile: javac LessonConsole.java Lesson36n_Facade.java
 // Run:     java Lesson36n_Facade
 //
 // After: Lesson 36m (Template Method)
@@ -18,7 +18,7 @@ public class Lesson36n_Facade {
     }
 
     static void problem() {
-        System.out.println("=== PROBLEM: client orchestrates many subsystems ===");
+        LessonConsole.heading("=== PROBLEM: client orchestrates many subsystems ===");
         Tv tv = new Tv();
         Amplifier amp = new Amplifier();
         DvdPlayer player = new DvdPlayer();
@@ -33,7 +33,7 @@ public class Lesson36n_Facade {
     }
 
     static void solution() {
-        System.out.println("=== SOLUTION: Facade — one entry point ===");
+        LessonConsole.heading("=== SOLUTION: Facade — one entry point ===");
         HomeTheaterFacade theater = new HomeTheaterFacade(new Tv(), new Amplifier(), new DvdPlayer());
         theater.watchMovie("Inception");
         System.out.println();
@@ -43,7 +43,7 @@ public class Lesson36n_Facade {
     }
 
     static void summary() {
-        System.out.println("=== Summary: Facade ===");
+        LessonConsole.heading("=== Summary: Facade ===");
         System.out.println("""
                 When:     many related classes must work together; client should stay simple
                 How:      facade class holds subsystem refs, exposes high-level methods
