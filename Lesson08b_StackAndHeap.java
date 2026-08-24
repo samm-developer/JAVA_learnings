@@ -3,7 +3,7 @@
 // Run:     java Lesson08b_StackAndHeap
 //
 // After: Lesson 08 (Classes & Objects)
-// Also see: 36c (JVM overview), 25b (stack per thread + shared heap)
+// Also see: 08c (Memory Management), 36c (JVM overview), 25b (threads & memory)
 //
 // ========== CHEAT SHEET ==========
 // STACK: method calls, local primitives, references (pointers) — per thread, LIFO
